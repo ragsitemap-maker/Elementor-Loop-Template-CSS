@@ -38,8 +38,6 @@ Initial standalone release.
 - Repeated-boot protection: passed
 - Rodest hook isolation: passed
 
-See the complete [Release Architecture](https://github.com/ragsitemap-maker/Elementor-Loop-Template-CSS/blob/main/RELEASE-ARCHITECTURE.md).
-
 ---
 
 ## 繁體中文
@@ -79,5 +77,3 @@ See the complete [Release Architecture](https://github.com/ragsitemap-maker/Elem
 - 管理頁欄位與排序控制輸出：通過
 - 重複 boot 防護：通過
 - Rodest hook 隔離：通過
-
-完整發布規範請參閱[發布架構書](https://github.com/ragsitemap-maker/Elementor-Loop-Template-CSS/blob/main/RELEASE-ARCHITECTURE.zh-TW.md)。

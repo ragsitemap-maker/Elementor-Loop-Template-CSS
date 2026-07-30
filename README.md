@@ -43,7 +43,6 @@ After activation, open **Tools → Template CSS** to:
 
 ## Project Documentation
 
-- [Release Architecture](RELEASE-ARCHITECTURE.md)
 - [v1.0.0 Release Notes](RELEASE-NOTES-v1.0.0.md)
 - [Traditional Chinese README](README.zh-TW.md)
 

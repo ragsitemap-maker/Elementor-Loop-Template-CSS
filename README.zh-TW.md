@@ -41,7 +41,6 @@
 
 ## 專案文件
 
-- [發布架構書](RELEASE-ARCHITECTURE.zh-TW.md)
 - [v1.0.0 發布說明](RELEASE-NOTES-v1.0.0.zh-TW.md)
 
 ## 開發驗證
