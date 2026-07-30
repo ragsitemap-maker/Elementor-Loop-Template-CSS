@@ -91,10 +91,6 @@ Elementor 官方資產指南也指出，每一份 stylesheet 都會增加頁面�
 6. 移除不需要補救的範本，只加入已確認受影響的 ID。
 7. 儲存清單並執行一次重建。
 
-## 專案文件
-
-- [v1.0.0 Release Notes（英文）](RELEASE-NOTES-v1.0.0.md)
-
 ## 開發驗證
 
 使用 WordPress PHP Docker image 執行：
