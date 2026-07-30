@@ -41,7 +41,7 @@
 
 ## 專案文件
 
-- [v1.0.0 發布說明](RELEASE-NOTES-v1.0.0.zh-TW.md)
+- [v1.0.0 Release Notes（英文）](RELEASE-NOTES-v1.0.0.md)
 
 ## 開發驗證
 

@@ -1,6 +1,6 @@
 # Elementor Template CSS Bundle
 
-**English** | [繁體中文](README.zh-TW.md)
+**English** | [Traditional Chinese](README.zh-TW.md)
 
 Elementor Template CSS Bundle prebuilds CSS from configurable Elementor templates
 into a single, content-hashed, stable bundle. It also provides an editable
