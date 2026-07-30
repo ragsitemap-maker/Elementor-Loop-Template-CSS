@@ -1,11 +1,16 @@
 # Elementor Template CSS Bundle v1.0.0
 
-Initial standalone release.
+Initial standalone release of a selective CSS recovery layer for Elementor
+templates whose styles are missing, incomplete, or broken on the front end.
+
+Add only administrator-confirmed affected template IDs. This release is not a
+whole-site CSS combiner and does not bundle every Elementor template by default.
 
 ## Features
 
-- Manage Elementor template groups, names, order, and template IDs
-- Combine multiple Loop/Template CSS sources into one content-hashed bundle
+- Manage recovery groups, names, order, and affected Elementor template IDs
+- Combine CSS only from the configured allowlist into one content-hashed bundle
+- Leave healthy and unlisted Elementor templates outside the recovery bundle
 - Token-safe CSS minification
 - Last-known-good manifest switching
 - Stable front-end enqueue with original-CSS fallback
