@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Elementor Template CSS Bundle
- * Description: Builds the configured Elementor template CSS into one stable, content-hashed bundle for front-end use.
+ * Description: Creates a selective CSS recovery bundle for Elementor templates whose styles are missing or broken on the front end.
  * Version: 1.0.0
  * Requires at least: 6.0
  * Requires PHP: 7.4
