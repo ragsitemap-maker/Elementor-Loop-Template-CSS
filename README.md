@@ -1,50 +1,55 @@
 # Elementor Template CSS Bundle
 
-將可設定的 Elementor 範本 CSS 預先合併成單一、內容雜湊命名的穩定 bundle，
-並提供 WordPress 後台清單管理、狀態檢查與手動重建功能。
+**English** | [繁體中文](README.zh-TW.md)
 
-本 repository 是單純的 **Elementor Loop Template CSS 外掛發布專案**。
-本機的 Elementor Pro 參考外掛只供開發時查閱，不屬於本專案，也不會上傳或打包。
+Elementor Template CSS Bundle prebuilds CSS from configurable Elementor templates
+into a single, content-hashed, stable bundle. It also provides an editable
+WordPress admin interface, build status, scheduled audits, and manual rebuilds.
 
-## 功能
+This repository is solely for publishing the **Elementor Loop Template CSS**
+WordPress plugin. Local Elementor Pro reference files are used only during
+development and are never committed, packaged, or distributed.
 
-- 新增、刪除、重新命名及排序範本群組
-- 編輯 Elementor 範本 ID
-- 自動移除跨群組重複 ID
-- 儲存清單後立即重建 CSS
-- 將多個 Elementor Loop／Template CSS 合併為單一 bundle
-- 以內容雜湊產生穩定檔名，方便瀏覽器與 CDN 快取
-- 保留 last-known-good bundle
-- 提供排程稽核、手動重建及 fallback
-- 與其他 WPCode／佈景主題 hook 程式碼隔離
+## Features
 
-## 後台功能
+- Add, remove, rename, and reorder template groups
+- Edit Elementor template IDs using lines, spaces, or commas
+- Automatically remove duplicate IDs across groups
+- Save the configuration and rebuild CSS immediately
+- Combine multiple Elementor Loop/Template CSS files into one bundle
+- Generate content-hashed filenames for browser and CDN caching
+- Preserve a last-known-good bundle
+- Run scheduled audits, manual rebuilds, and original-CSS fallback
+- Remain isolated from unrelated WPCode and theme-hook snippets
 
-啟用後前往「工具 → Template CSS」：
+## WordPress Admin
 
-- 查看 bundle 狀態、大小、建置時間、範本數及內容雜湊
-- 管理群組名稱與 Elementor 範本 ID
-- 透過上下按鈕調整 CSS 串接順序
-- 儲存清單並立即重建
-- 恢復外掛內建預設清單
-- 手動重建及檢視目前 bundle
+After activation, open **Tools → Template CSS** to:
 
-## 安裝
+- Review bundle status, size, build time, template count, and content hash
+- Manage group names and Elementor template IDs
+- Change CSS concatenation order with move-up and move-down controls
+- Save the list and rebuild immediately
+- Restore the plugin's built-in defaults
+- Manually rebuild or inspect the current bundle
 
-1. 從 GitHub Releases 下載最新版 ZIP。
-2. 在 WordPress 後台前往「外掛 → 安裝外掛 → 上傳外掛」。
-3. 停用舊的穩定 Elementor CSS WPCode 片段或外掛。
-4. 啟用 **Elementor Template CSS Bundle**。
-5. 前往「工具 → Template CSS」，確認清單後執行一次重建。
+## Installation
 
-## 專案文件
+1. Download the latest ZIP from [GitHub Releases](https://github.com/ragsitemap-maker/Elementor-Loop-Template-CSS/releases).
+2. In WordPress, open **Plugins → Add New Plugin → Upload Plugin**.
+3. Deactivate any previous stable Elementor CSS WPCode snippet or plugin.
+4. Upload and activate **Elementor Template CSS Bundle**.
+5. Open **Tools → Template CSS**, review the list, and run one rebuild.
 
-- [發布架構書](RELEASE-ARCHITECTURE.md)
-- [v1.0.0 發布說明](RELEASE-NOTES-v1.0.0.md)
+## Project Documentation
 
-## 開發驗證
+- [Release Architecture](RELEASE-ARCHITECTURE.md)
+- [v1.0.0 Release Notes](RELEASE-NOTES-v1.0.0.md)
+- [Traditional Chinese README](README.zh-TW.md)
 
-使用 WordPress PHP Docker image 執行：
+## Development Validation
+
+Run with the WordPress PHP Docker image:
 
 ```bash
 php -l elementor-template-css-bundle/elementor-template-css-bundle.php
@@ -52,6 +57,6 @@ php -l elementor-template-css-bundle/includes/class-elementor-template-css-bundl
 php tests/plugin-smoke.php
 ```
 
-## 授權
+## License
 
 GPL-2.0-or-later
