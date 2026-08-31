@@ -1,6 +1,6 @@
 <?php
 /**
- * Elementor Template CSS Bundle (build v6)
+ * Loop and Template CSS Recovery for Elementor (build v6)
  *
  * 用途：把指定的 Elementor 全域範本 CSS 預先合併成單一內容雜湊檔，
  *       存放於 Elementor 清快取不會觸及的目錄，前台只讀這一支。
@@ -20,7 +20,7 @@
  *     群組宣告順序 = CSS 串接順序；產出的 bundle 會標註來源群組，
  *     方便在 DevTools 直接看出某段樣式屬於哪一組範本。
  *
- * 放置位置：由 Elementor Template CSS Bundle 外掛載入。
+ * 放置位置：由 Loop and Template CSS Recovery for Elementor 外掛載入。
  * 注意：啟用外掛後，請停用 WPCode 內的舊版片段。
  */
 
@@ -402,7 +402,7 @@ final class Elementor_Template_CSS_Bundle {
                 . esc_attr( $color )
                 . ';margin-right:6px;vertical-align:middle;"></span>Template CSS',
             'href'  => admin_url( 'tools.php?page=' . self::PAGE_SLUG ),
-            'meta'  => [ 'title' => 'Elementor 範本 CSS Bundle：' . $state ],
+            'meta'  => [ 'title' => 'Loop 與 Template CSS Recovery：' . $state ],
         ] );
 
         if ( $manifest ) {
@@ -463,7 +463,7 @@ final class Elementor_Template_CSS_Bundle {
 
     public static function admin_menu(): void {
         add_management_page(
-            'Elementor Template CSS Bundle',
+            'Loop and Template CSS Recovery for Elementor',
             'Template CSS',
             self::capability(),
             self::PAGE_SLUG,
@@ -482,7 +482,7 @@ final class Elementor_Template_CSS_Bundle {
         $declared = self::configured_groups();
         $custom   = is_array( get_option( self::CONFIG_OPTION, null ) );
 
-        echo '<div class="wrap"><h1>Elementor 範本 CSS Bundle</h1>';
+        echo '<div class="wrap"><h1>Loop 與 Template CSS Recovery for Elementor</h1>';
 
         // --- 總覽 ---
         echo '<table class="widefat striped" style="max-width:1000px;margin:16px 0;"><tbody>';
@@ -1597,7 +1597,7 @@ final class Elementor_Template_CSS_Bundle {
     }
 
     private static function log( string $message ): void {
-        error_log( '[Elementor Template CSS Bundle] ' . $message );
+        error_log( '[Loop and Template CSS Recovery for Elementor] ' . $message );
     }
 }
 

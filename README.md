@@ -1,12 +1,14 @@
-# Elementor Template CSS Bundle
+# Loop and Template CSS Recovery for Elementor
 
 **English** | [Traditional Chinese](README.zh-TW.md)
 
-Elementor Template CSS Bundle is a **selective CSS recovery layer** for Elementor
-templates that render without styles, with incomplete responsive rules, or with
-broken styling on the front end.
+Loop and Template CSS Recovery for Elementor is a **selective CSS recovery layer**
+for Elementor Loop Items, Theme Builder templates, and other templates that render
+without styles, with incomplete responsive rules, or with broken front-end CSS.
 
-This repository is solely for publishing the **Elementor Loop Template CSS**
+This independent third-party plugin is not affiliated with or endorsed by Elementor.
+
+This repository solely publishes the **Loop and Template CSS Recovery for Elementor**
 WordPress plugin. Local Elementor Pro reference files are used only during
 development and are never committed, packaged, or distributed.
 
@@ -92,12 +94,13 @@ After activation, open **Tools → Template CSS** to:
 ## Installation
 
 1. Download the latest ZIP from [GitHub Releases](https://github.com/ragsitemap-maker/Elementor-Loop-Template-CSS/releases).
-2. In WordPress, open **Plugins → Add New Plugin → Upload Plugin**.
-3. Deactivate any previous stable Elementor CSS WPCode snippet or plugin.
-4. Upload and activate **Elementor Template CSS Bundle**.
-5. Open **Tools → Template CSS**.
-6. Remove templates that do not need recovery and add only confirmed affected IDs.
-7. Save the list and run one rebuild.
+2. If upgrading from version 1.0.x, deactivate and delete the old **Elementor Template CSS Bundle** plugin folder. Existing settings and generated bundles remain available.
+3. In WordPress, open **Plugins → Add New Plugin → Upload Plugin**.
+4. Deactivate any previous Elementor CSS recovery snippet or plugin that this plugin replaces.
+5. Upload and activate **Loop and Template CSS Recovery for Elementor**.
+6. Open **Tools → Template CSS**.
+7. Remove templates that do not need recovery and add only confirmed affected IDs.
+8. Save the list and run one rebuild.
 
 ## Project Documentation
 
@@ -108,8 +111,8 @@ After activation, open **Tools → Template CSS** to:
 Run with the WordPress PHP Docker image:
 
 ```bash
-php -l elementor-template-css-bundle/elementor-template-css-bundle.php
-php -l elementor-template-css-bundle/includes/class-elementor-template-css-bundle.php
+php -l loop-and-template-css-recovery-for-elementor/loop-and-template-css-recovery-for-elementor.php
+php -l loop-and-template-css-recovery-for-elementor/includes/class-elementor-template-css-bundle.php
 php tests/plugin-smoke.php
 ```
 

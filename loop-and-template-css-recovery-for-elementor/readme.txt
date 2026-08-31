@@ -1,19 +1,21 @@
-=== Elementor Template CSS Bundle ===
+=== Loop and Template CSS Recovery for Elementor ===
 Contributors: site-team
-Tags: elementor, elementor-pro, css, performance
+Tags: elementor, loop, loop-builder, template-css, css
 Requires at least: 6.0
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 License: GPLv2 or later
 
-Recovers missing or broken front-end styles for selected Elementor templates.
+Recovers missing or broken front-end CSS for selected Elementor Loop Items, Theme Builder templates, and other templates.
 
 == Description ==
 
-Elementor Template CSS Bundle is a selective CSS recovery layer. It is intended
+Loop and Template CSS Recovery for Elementor is a selective CSS recovery layer. It is intended
 for Elementor Loop Items, Theme Builder templates, and other templates that
 look correct in the editor but render with missing, incomplete, or broken CSS
 on the front end.
+
+This independent third-party plugin is not affiliated with or endorsed by Elementor.
 
 Add only template IDs that have a confirmed styling problem. The plugin reads
 CSS for those selected templates, removes duplicate IDs, combines the CSS in
@@ -47,9 +49,9 @@ rendered templates, and cached pages referencing deleted generated CSS files:
 
 == Installation ==
 
-1. Deactivate the former stable Elementor CSS WPCode snippet or plugin.
-2. Upload and activate this plugin.
-3. Keep unrelated snippets, including the Rodest snippet, enabled.
+1. If upgrading from version 1.0.x, deactivate and delete the old Elementor Template CSS Bundle plugin folder. Existing settings and generated bundles remain available.
+2. Deactivate any previous Elementor CSS recovery snippet or plugin that this plugin replaces.
+3. Upload and activate Loop and Template CSS Recovery for Elementor.
 4. Open Tools > Template CSS.
 5. Add only the IDs of templates with a confirmed front-end CSS problem.
 6. Save the list and trigger "Rebuild now" once.
@@ -78,12 +80,13 @@ being bundled by default.
 No. Deactivation removes this plugin's scheduled events but preserves the
 last-known-good bundle and manifest.
 
-= Does this plugin change theme hooks? =
-
-No. It does not add or remove Rodest theme callbacks. A separate snippet such
-as remove_action( 'rodest_action_before_page_inner', ... ) remains independent.
-
 == Changelog ==
+
+= 1.1.0 =
+
+* Renames the plugin to Loop and Template CSS Recovery for Elementor.
+* Changes the public package slug, plugin directory, main file, and text domain to match the new name while preserving existing internal settings and hooks.
+* Clarifies recovery coverage for Elementor Loop Items, Theme Builder templates, and other administrator-selected templates.
 
 = 1.0.1 =
 

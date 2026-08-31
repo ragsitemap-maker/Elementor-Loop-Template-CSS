@@ -137,9 +137,20 @@ function test_assert( bool $condition, string $message ): void {
 }
 
 $plugin_file = dirname( __DIR__ )
-	. '/elementor-template-css-bundle/elementor-template-css-bundle.php';
+	. '/loop-and-template-css-recovery-for-elementor/loop-and-template-css-recovery-for-elementor.php';
 
 require $plugin_file;
+
+$plugin_source = (string) file_get_contents( $plugin_file );
+
+test_assert(
+    false !== strpos( $plugin_source, 'Plugin Name: Loop and Template CSS Recovery for Elementor' ),
+    'The public plugin name was not updated.'
+);
+test_assert(
+    false !== strpos( $plugin_source, 'Text Domain: loop-and-template-css-recovery-for-elementor' ),
+    'The public text domain does not match the new plugin slug.'
+);
 
 test_assert(
 	class_exists( 'Elementor_Template_CSS_Bundle', false ),

@@ -1,13 +1,15 @@
-# Elementor Template CSS Bundle
+# Loop and Template CSS Recovery for Elementor
 
 [English](README.md) | **繁體中文**
 
-Elementor Template CSS Bundle 是一個**選擇性的 CSS 補救層**，專門處理在
-Elementor 編輯器內正常、但到前台卻沒有樣式、responsive rules 不完整或版面
-樣式被破壞的範本。
+Loop and Template CSS Recovery for Elementor 是一個**選擇性的 CSS 補救層**，
+專門處理 Elementor Loop Items、Theme Builder 範本及其他範本在編輯器內正常，
+但前台缺少樣式、responsive rules 不完整或 CSS 損壞的情況。
 
-本 repository 是單純的 **Elementor Loop Template CSS 外掛發布專案**。
-本機的 Elementor Pro 參考外掛只供開發時查閱，不屬於本專案，也不會上傳或打包。
+這是獨立開發的第三方外掛，與 Elementor 沒有從屬或官方認可關係。
+
+本 repository 單純發布 **Loop and Template CSS Recovery for Elementor** WordPress
+外掛。本機的 Elementor Pro 參考檔只供開發時查閱，不屬於本專案，也不會上傳或打包。
 
 ## 為什麼需要這個外掛
 
@@ -86,20 +88,21 @@ Elementor 官方資產指南也指出，每一份 stylesheet 都會增加頁面�
 ## 安裝
 
 1. 從 GitHub Releases 下載最新版 ZIP。
-2. 在 WordPress 後台前往「外掛 → 安裝外掛 → 上傳外掛」。
-3. 停用舊的穩定 Elementor CSS WPCode 片段或外掛。
-4. 啟用 **Elementor Template CSS Bundle**。
-5. 前往「工具 → Template CSS」。
-6. 移除不需要補救的範本，只加入已確認受影響的 ID。
-7. 儲存清單並執行一次重建。
+2. 若從 1.0.x 升級，先停用並刪除舊的 **Elementor Template CSS Bundle** 外掛資料夾；既有設定與已產生 bundle 會保留。
+3. 在 WordPress 後台前往「外掛 → 安裝外掛 → 上傳外掛」。
+4. 停用這個外掛將取代的舊版 Elementor CSS recovery 片段或外掛。
+5. 上傳並啟用 **Loop and Template CSS Recovery for Elementor**。
+6. 前往「工具 → Template CSS」。
+7. 移除不需要補救的範本，只加入已確認受影響的 ID。
+8. 儲存清單並執行一次重建。
 
 ## 開發驗證
 
 使用 WordPress PHP Docker image 執行：
 
 ```bash
-php -l elementor-template-css-bundle/elementor-template-css-bundle.php
-php -l elementor-template-css-bundle/includes/class-elementor-template-css-bundle.php
+php -l loop-and-template-css-recovery-for-elementor/loop-and-template-css-recovery-for-elementor.php
+php -l loop-and-template-css-recovery-for-elementor/includes/class-elementor-template-css-bundle.php
 php tests/plugin-smoke.php
 ```
 

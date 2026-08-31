@@ -1,18 +1,18 @@
 <?php
 /**
- * Plugin Name: Elementor Template CSS Bundle
- * Description: Creates a selective CSS recovery bundle for Elementor templates whose styles are missing or broken on the front end.
- * Version: 1.0.1
+ * Plugin Name: Loop and Template CSS Recovery for Elementor
+ * Description: Builds a selective recovery bundle for missing or broken CSS in Elementor Loop Items, Theme Builder templates, and other templates.
+ * Version: 1.1.0
  * Requires at least: 6.0
  * Requires PHP: 7.4
  * Author: Site Team
  * License: GPL-2.0-or-later
- * Text Domain: elementor-template-css-bundle
+ * Text Domain: loop-and-template-css-recovery-for-elementor
  */
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'SITE_ELEMENTOR_TEMPLATE_CSS_BUNDLE_VERSION', '1.0.1' );
+define( 'SITE_ELEMENTOR_TEMPLATE_CSS_BUNDLE_VERSION', '1.1.0' );
 define( 'SITE_ELEMENTOR_TEMPLATE_CSS_BUNDLE_FILE', __FILE__ );
 
 require_once __DIR__ . '/includes/class-elementor-template-css-bundle.php';
