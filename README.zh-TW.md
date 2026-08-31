@@ -30,8 +30,8 @@ Elementor 官方 issue tracker 已出現過這些真實案例：
 
 此外掛針對的是這些**已確認有問題的特定範本**。管理員只加入前台 CSS
 不可靠的 template ID；外掛向 Elementor 取得這些指定範本的 generated CSS，
-依設定順序合併、寫入穩定的內容雜湊檔，再透過 Elementor 前台樣式生命週期載入
-這份補救 bundle。
+依設定順序合併、寫入穩定的內容雜湊檔，再於 WordPress 印出 late front-end
+styles 前排入這份補救 bundle。
 
 ## 刻意採用選擇性清單
 
@@ -69,6 +69,8 @@ Elementor 官方資產指南也指出，每一份 stylesheet 都會增加頁面�
 6. 重建失敗時保留 last-known-good bundle。
 7. 在相關 Elementor 儲存、清快取、手動要求或稽核後重建。
 8. 沒有有效 bundle 時，fallback 至 Elementor 原始 CSS。
+9. 在 nested／Loop Template render 時才發現的 Elementor 樣式之後排入
+   recovery bundle，保留作者設定預期的 CSS cascade 順序。
 
 ## 後台功能
 

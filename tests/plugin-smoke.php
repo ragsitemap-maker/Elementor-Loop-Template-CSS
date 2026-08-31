@@ -4,16 +4,23 @@ declare( strict_types=1 );
 
 define( 'ABSPATH', '/' );
 
-$GLOBALS['test_actions']      = [];
-$GLOBALS['test_deactivation'] = null;
-$GLOBALS['test_removed']      = [];
-$GLOBALS['test_options']      = [];
+$GLOBALS['test_actions']         = [];
+$GLOBALS['test_action_counts']   = [];
+$GLOBALS['test_deactivation']    = null;
+$GLOBALS['test_enqueued_styles'] = [];
+$GLOBALS['test_removed']         = [];
+$GLOBALS['test_options']         = [];
+$GLOBALS['test_style_queue']     = [];
 
 function add_action( $hook, $callback, $priority = 10, $accepted_args = 1 ): void {
 	$GLOBALS['test_actions'][ $hook ][ $priority ][] = [
 		'callback'      => $callback,
 		'accepted_args' => $accepted_args,
 	];
+}
+
+function did_action( $hook ): int {
+	return (int) ( $GLOBALS['test_action_counts'][ $hook ] ?? 0 );
 }
 
 function is_admin(): bool {
@@ -89,6 +96,19 @@ function number_format_i18n( $number, $decimals = 0 ): string {
     return number_format( (float) $number, (int) $decimals );
 }
 
+function wp_enqueue_style( $handle, $src = '', $deps = [], $ver = false, $media = 'all' ): void {
+	if ( ! in_array( $handle, $GLOBALS['test_style_queue'], true ) ) {
+		$GLOBALS['test_style_queue'][] = $handle;
+	}
+
+	$GLOBALS['test_enqueued_styles'][ $handle ] = [
+		'src'   => $src,
+		'deps'  => $deps,
+		'ver'   => $ver,
+		'media' => $media,
+	];
+}
+
 function register_deactivation_hook( $file, $callback ): void {
 	$GLOBALS['test_deactivation'] = [
 		'file'     => $file,
@@ -126,8 +146,8 @@ test_assert(
 	'The plugin class was not loaded.'
 );
 test_assert(
-	isset( $GLOBALS['test_actions']['elementor/frontend/after_enqueue_styles'][20] ),
-	'The Elementor front-end hook was not registered.'
+	isset( $GLOBALS['test_actions']['wp_footer'][19] ),
+	'The late bundle enqueue hook was not registered before WordPress footer styles.'
 );
 test_assert(
     is_array( $GLOBALS['test_deactivation'] ),
@@ -138,13 +158,62 @@ test_assert(
     'The group settings endpoint was not registered.'
 );
 
-$hook_count_before = count( $GLOBALS['test_actions']['elementor/frontend/after_enqueue_styles'][20] );
+$hook_count_before = count( $GLOBALS['test_actions']['wp_footer'][19] );
 Elementor_Template_CSS_Bundle::boot();
-$hook_count_after = count( $GLOBALS['test_actions']['elementor/frontend/after_enqueue_styles'][20] );
+$hook_count_after = count( $GLOBALS['test_actions']['wp_footer'][19] );
 
 test_assert(
 	$hook_count_before === $hook_count_after,
 	'Loading the class file twice registered duplicate hooks.'
+);
+
+$manifest_property = new ReflectionProperty(
+	'Elementor_Template_CSS_Bundle',
+	'manifest'
+);
+$manifest_property->setAccessible( true );
+$manifest_property->setValue(
+	null,
+	[
+		'url'   => 'https://example.test/template-bundle.css',
+		'hash'  => 'content-hash',
+		'fonts' => [],
+		'icons' => [],
+	]
+);
+
+$footer_callback = $GLOBALS['test_actions']['wp_footer'][19][0]['callback'];
+$GLOBALS['test_style_queue'] = [ 'widget-nested-tabs' ];
+
+call_user_func( $footer_callback );
+
+test_assert(
+	[ 'widget-nested-tabs' ] === $GLOBALS['test_style_queue'],
+	'The bundle was enqueued without the Elementor front-end admission action.'
+);
+
+$GLOBALS['test_action_counts']['elementor/frontend/after_enqueue_styles'] = 1;
+call_user_func( $footer_callback );
+
+test_assert(
+	[ 'widget-nested-tabs', 'elementor-template-css-bundle' ] === $GLOBALS['test_style_queue'],
+	'The recovery bundle was not queued after the late-discovered widget stylesheet.'
+);
+test_assert(
+	[
+		'src'   => 'https://example.test/template-bundle.css',
+		'deps'  => [ 'elementor-frontend' ],
+		'ver'   => 'content-hash',
+		'media' => 'all',
+	] === $GLOBALS['test_enqueued_styles']['elementor-template-css-bundle'],
+	'The late bundle enqueue did not preserve its URL, dependency, hash, or media contract.'
+);
+
+call_user_func( $footer_callback );
+
+test_assert(
+	1 === count( array_keys( $GLOBALS['test_style_queue'], 'elementor-template-css-bundle', true ) ),
+	'Repeated enqueue attempts duplicated the bundle handle.'
 );
 
 add_action(
@@ -185,6 +254,8 @@ $sanitize_method = new ReflectionMethod(
     'Elementor_Template_CSS_Bundle',
     'sanitize_group_rows'
 );
+$configured_method->setAccessible( true );
+$sanitize_method->setAccessible( true );
 
 $default_groups = $configured_method->invoke( null );
 
@@ -241,4 +312,4 @@ test_assert(
     'The editable group settings page did not render the expected fields or reorder script.'
 );
 
-echo "PASS: plugin boot, configurable groups, duplicate-load guard, and Rodest hook isolation.\n";
+echo "PASS: plugin boot, late bundle order, configurable groups, duplicate-load guard, and Rodest hook isolation.\n";

@@ -33,8 +33,8 @@ Examples reported in Elementor's official issue tracker include:
 This plugin provides an explicit recovery path for those **specific affected
 templates**. An administrator adds only the template IDs known to be unreliable.
 The plugin asks Elementor for their generated CSS, combines that selected CSS
-in a controlled order, writes it to a stable content-hashed file, and enqueues
-the recovery bundle through Elementor's front-end style lifecycle.
+in a controlled order, writes it to a stable content-hashed file, and queues
+the recovery bundle immediately before WordPress prints late front-end styles.
 
 ## Selective by Design
 
@@ -75,6 +75,8 @@ Add a template ID only after confirming one or more of these symptoms:
 6. Preserves the last-known-good bundle if a rebuild fails.
 7. Rebuilds after relevant Elementor saves, cache clearing, manual requests, or audits.
 8. Falls back to the original Elementor CSS files if no valid bundle exists.
+9. Queues the recovery bundle after Elementor styles discovered while rendering
+   nested and Loop templates, preserving the intended CSS cascade order.
 
 ## WordPress Admin
 

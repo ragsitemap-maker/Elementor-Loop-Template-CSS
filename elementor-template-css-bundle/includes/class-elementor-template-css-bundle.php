@@ -237,11 +237,11 @@ final class Elementor_Template_CSS_Bundle {
 
         self::$booted = true;
 
-        // 前台：唯一的讀取路徑。
+        // 前台：在 WordPress priority 20 印出 late styles 前最後入列。
         add_action(
-            'elementor/frontend/after_enqueue_styles',
+            'wp_footer',
             [ self::class, 'enqueue_bundle' ],
-            20
+            19
         );
 
         // 觸發點：全部匯流到 queue_rebuild()，由它決定何時執行。
@@ -275,6 +275,11 @@ final class Elementor_Template_CSS_Bundle {
      * 不做攤平、不做 hash 運算、不做 DB 查詢、不做檔案重建。
      */
     public static function enqueue_bundle(): void {
+        // 保留原本的 Elementor admission，避免在非 Elementor 頁面擴大載入。
+        if ( ! did_action( 'elementor/frontend/after_enqueue_styles' ) ) {
+            return;
+        }
+
         if ( ! apply_filters( 'elementor_template_css_bundle_should_enqueue', true ) ) {
             return;
         }
@@ -282,14 +287,15 @@ final class Elementor_Template_CSS_Bundle {
         $manifest = self::manifest();
 
         if ( $manifest ) {
+            // 字型／圖示先入列，bundle 最後入列以保有最終 cascade 位置。
+            self::enqueue_fonts_and_icons( $manifest );
+
             wp_enqueue_style(
                 self::STYLE_HANDLE,
                 $manifest['url'],
                 [ 'elementor-frontend' ],
                 $manifest['hash']
             );
-
-            self::enqueue_fonts_and_icons( $manifest );
             return;
         }
 
@@ -1515,7 +1521,7 @@ final class Elementor_Template_CSS_Bundle {
     }
 
     /**
-     * 此時已在 wp_head 階段，header 多半送出，只有 DONOTCACHEPAGE 實際有效
+     * 此時已在 wp_footer 階段，header 多半送出，只有 DONOTCACHEPAGE 實際有效
      * （多數 page cache 於 output buffer flush 時才判定）。
      */
     private static function mark_response_uncacheable(): void {

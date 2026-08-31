@@ -3,7 +3,7 @@ Contributors: site-team
 Tags: elementor, elementor-pro, css, performance
 Requires at least: 6.0
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 
 Recovers missing or broken front-end styles for selected Elementor templates.
@@ -84,6 +84,11 @@ No. It does not add or remove Rodest theme callbacks. A separate snippet such
 as remove_action( 'rodest_action_before_page_inner', ... ) remains independent.
 
 == Changelog ==
+
+= 1.0.1 =
+
+* Queues the recovery bundle after late-discovered Elementor widget styles so template-authored rules keep their intended cascade order.
+* Preserves Elementor-only admission and the existing manifest fallback behavior.
 
 = 1.0.0 =
 
